@@ -1,0 +1,96 @@
+<div class="container">
+  <h1 class="title">My Task List</h1>
+
+  <div class="form">
+    <input
+      class="input"
+      type="text"
+      [(ngModel)]="newTodoTitle"
+      placeholder="Print new task..."
+    />
+
+    <select class="select" [(ngModel)]="newTodoPriority">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+
+    <button class="add" (click)="addTodo()">Add task</button>
+  </div>
+
+  <div class="tabs">
+    <button
+      class="tab"
+      [ngClass]="{ active: filter === 'all' }"
+      (click)="filter = 'all'"
+    >
+      ALL
+    </button>
+    <button
+      class="tab"
+      [ngClass]="{ active: filter === 'active' }"
+      (click)="filter = 'active'"
+    >
+      ACTIVE
+    </button>
+    <button
+      class="tab"
+      [ngClass]="{ active: filter === 'completed' }"
+      (click)="filter = 'completed'"
+    >
+      COMPLETED
+    </button>
+  </div>
+
+  <div class="list" *ngIf="todos.length > 0; else loading">
+    <div
+      class="item"
+      *ngFor="let todo of filteredTodos"
+      [ngClass]="{
+        'border-low': todo.priority === 'low',
+        'border-medium': todo.priority === 'medium',
+        'border-high': todo.priority === 'high',
+      }"
+    >
+      <div class="content">
+        <input class="check" type="checkbox" [(ngModel)]="todo.completed" />
+        <span
+          class="text"
+          *ngIf="editingId !== todo.id"
+          [ngClass]="{
+            done: todo.completed,
+            disabled: todo.completed,
+          }"
+          (dblclick)="startEdit(todo)"
+          [title]="
+            todo.completed
+              ? 'Completed tasks cannot be edited'
+              : 'Double click to edit'
+          "
+        >
+          {{ todo.title }}
+        </span>
+
+        <input
+          type="text"
+          class="edit-input"
+          *ngIf="editingId === todo.id"
+          [(ngModel)]="todo.title"
+          (keyup.enter)="saveEdit(todo)"
+          (blur)="saveEdit(todo)"
+          (keyup.escape)="cancelEdit(todo)"
+          autofocus
+        />
+      </div>
+      <div class="box">
+        <span class="badge">{{ todo.priority }}</span>
+
+        <button class="delete" (click)="deleteTodo(todo.id)">DELETE</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <p class="loader">Loading tasks...</p>
+  </ng-template>
+</div>
