@@ -21,8 +21,8 @@
 
 Функціональний менеджер завдань, побудований на Angular. Проєкт демонструє роботу з API, фільтрацію даних, керування станами компонентів та сучасну верстку.
 
-- **[GitHub repository]**(https://github.com/Vall-Re/usense_test_todo-app)
-- **[Demo Link]**(https://usense-test-todo-app.vercel.app/)
+- **[GitHub repository](https://github.com/Vall-Re/usense_test_todo-app)**
+- **[Demo Link](https://usense-test-todo-app.vercel.app/)**
 
 ### Основні можливості
 
