@@ -7,7 +7,7 @@ import { Todo } from '../models/todo.model';
   providedIn: 'root'
 })
 export class TodoService {
-  private apiUrl = 'http://jsonplaceholder.typicode.com/todos';
+  private apiUrl = 'https://jsonplaceholder.typicode.com/todos';
 
   constructor(private http: HttpClient) {}
 
